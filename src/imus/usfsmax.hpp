@@ -121,11 +121,15 @@ namespace hf {
 
             void computeEulerAngles(float q0, float q1, float q2, float q3, float euler[3])
             {
-    	        // MAXUSFS Quaternion is ENU
-                euler[0] = asin(2.0f*(q2*q3+q0*q1));                            // roll
-                euler[1] = atan2(2.0f*(q0*q2-q1*q3),q0*q0-q1*q1-q2*q2+q3*q3);   // pitch
-                euler[2] = atan2(2.0f*(q1*q2-q0*q3), q0*q0-q1*q1+q2*q2-q3*q3);  // yaw (heading)
-	     }
+                //roll    = atan2f(2.0f*(q0*q2 - q1*q3), q0*q0 - q1*q1 - q2*q2 + q3*q3);
+                //pitch   = asinf(2.0f*(q2*q3 + q0*q1));
+                //heading = atan2f(2.0f*(q1*q2 - q0*q3), q0*q0 - q1*q1 + q2*q2 - q3*q3);
+
+                // MAXUSFS Quaternion is ENU
+                euler[0] = atan2f(2.0f*(q0*q2 - q1*q3), q0*q0 - q1*q1 - q2*q2 + q3*q3);  // roll
+                euler[1] = asinf(2.0f*(q2*q3 + q0*q1));                                  // pitch
+                euler[2] = atan2f(2.0f*(q1*q2 - q0*q3), q0*q0 - q1*q1 + q2*q2 - q3*q3);  // yaw (heading)
+            }
 
     }; // class USFSMAX
 
