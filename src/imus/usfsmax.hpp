@@ -91,17 +91,17 @@ namespace hf {
                 return false;
             }
 
-            virtual bool getQuaternion(float & qw, float & qx, float & qy, float & qz, float time) override
+            virtual bool getQuaternion(float & q0, float & q1, float & q2, float & q3, float time) override
             {
                 (void)time;
 
                 if (_usfsmax.quaternionReady()) {
                     float quat[4] = {};
                     _usfsmax.readQuat(quat);
-                    qw = quat[0];
-                    qx = quat[1];
-                    qy = quat[2];
-                    qz = quat[3];
+                    q0 = quat[0];
+                    q1 = quat[1];
+                    q2 = quat[2];
+                    q3 = quat[3];
 
                     return true;
                 }
@@ -118,6 +118,14 @@ namespace hf {
                 delay(100);
 
             }
+
+            void computeEulerAngles(float q0, float q1, float q2, float q3, float euler[3])
+            {
+    	        // MAXUSFS Quaternion is ENU
+                euler[0] = asin(2.0f*(q2*q3+q0*q1));                            // roll
+                euler[1] = atan2(2.0f*(q0*q2-q1*q3),q0*q0-q1*q1-q2*q2+q3*q3);   // pitch
+                euler[2] = atan2(2.0f*(q1*q2-q0*q3), q0*q0-q1*q1+q2*q2-q3*q3);  // yaw (heading)
+	     }
 
     }; // class USFSMAX
 

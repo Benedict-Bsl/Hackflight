@@ -74,13 +74,13 @@ namespace hf {
                 return false;
             }
 
-            virtual bool getQuaternion(float & qw, float & qx, float & qy, float & qz, float time) override
+            virtual bool getQuaternion(float & q0, float & q1, float & q2, float & q3, float time) override
             {
                 (void)time;
 
                 if (_sentral.gotQuaternion()) {
 
-                    _sentral.readQuaternion(qw, qx, qy, qz);
+                    _sentral.readQuaternion(q0, q1, q2, q3);
 
                     return true;
                 }
@@ -98,6 +98,13 @@ namespace hf {
                 }
             }
 
-    }; // class USFS
+            void computeEulerAngles(float q0, float q1, float q2, float q3, float euler[3])
+            {
+                euler[0] = atan2(2.0f*(q0*q1+q2*q3),q0*q0-q1*q1-q2*q2+q3*q3);   // roll
+                euler[1] =  asin(2.0f*(q1*q3-q0*q2));                           // pitch
+                euler[2] = atan2(2.0f*(q1*q2+q0*q3),q0*q0+q1*q1-q2*q2-q3*q3);   // yaw (heading)
+	     }
+
+     }; // class USFS
 
 } // namespace hf

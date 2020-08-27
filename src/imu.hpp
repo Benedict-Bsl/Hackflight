@@ -48,6 +48,7 @@ namespace hf {
             // Core functionality
             virtual bool getQuaternion(float & qw, float & qx, float & qy, float & qz, float time) = 0;
             virtual bool getGyrometer(float & gx, float & gy, float & gz) = 0;
+            virtual void computeEulerAngles(float qw, float qx, float qy, float qz, float euler[3]);
 
             // Required by some IMUs
             virtual void begin(void) { }

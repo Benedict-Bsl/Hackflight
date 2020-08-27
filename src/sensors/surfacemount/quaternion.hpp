@@ -56,7 +56,7 @@ namespace hf {
             {
                 (void)time;
 
-                computeEulerAngles(_w, _x, _y, _z, state.rotation);
+                imu->computeEulerAngles(_w, _x, _y, _z, state.rotation);
 
                 // Convert heading from [-pi,+pi] to [0,2*pi]
                 if (state.rotation[2] < 0) {
@@ -69,20 +69,11 @@ namespace hf {
                 return imu->getQuaternion(_w, _x, _y, _z, time);
             }
 
-        public:
 
             // We make this public so we can use it in different sketches
             static void computeEulerAngles(float qw, float qx, float qy, float qz, float euler[3])
             {
-                euler[0] = atan2(2.0f*(qw*qx+qy*qz),qw*qw-qx*qx-qy*qy+qz*qz);
-                euler[1] =  asin(2.0f*(qx*qz-qw*qy));
-                euler[2] = atan2(2.0f*(qx*qy+qw*qz),qw*qw+qx*qx-qy*qy-qz*qz);
-
-    	        // MAXUSFS Quaternion is ENU
-                //euler[0] = asin(2.0f*(qy*qz+qw*qx));
-                //euler[1] = atan2(2.0f*(qw*qy-qx*qz),qw*qw-qx*qx-qy*qy+qz*qz);
-                //euler[2] = atan2(2.0f*(qx*qy-qw*qz), qw*qw-qx*qx+qy*qy-qz*qz);
-	     }
+	    }
 
     };  // class Quaternion
 
