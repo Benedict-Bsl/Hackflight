@@ -41,6 +41,8 @@ hf::MockMotor motors;
 
 void setup(void)
 {
+    hf::ArduinoBoard::powerPins(18, 19);
+
     h.init(new hf::TinyPico(), &imu, &rc, &mixer, &motors);
 }
 
