@@ -1,9 +1,9 @@
 /*
-   Hackflight sketch for TinyPICO with USFSMAX IMU, and mock motors/receiver
+   Hackflight sketch for TinyPICO with EM7180 USFS IMU, and mock motors/receiver
 
    Additional libraries needed:
 
-       https://github.com/simondlevy/USFSMAX
+       https://github.com/simondlevy/USFS
        https://github.com/simondlevy/CrossPlatformDataBus
 
 
@@ -27,7 +27,7 @@
 #include "receivers/mock.hpp"
 #include "actuators/mixers/quadxcf.hpp"
 #include "motors/mock.hpp"
-#include "imus/usfsmax.hpp"
+#include "imus/usfs.hpp"
 
 hf::Hackflight h;
 
@@ -35,7 +35,7 @@ hf::MockReceiver rc;
 
 hf::MixerQuadXCF mixer;
 
-hf::USFSMAX_IMU imu;
+hf::USFS imu;
 
 hf::MockMotor motors;
 
